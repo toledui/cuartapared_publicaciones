@@ -1,0 +1,91 @@
+body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+  }
+  .modal{
+    margin: 0 auto;
+  }
+  .swiper-container {
+    max-width: 1000px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    height: 180px;
+    width:100%;
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .swiper-slide2{
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    height: 400px;
+    width:100%;
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .namePubli{
+    font-weight: 700;
+    width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  position: absolute;
+  transition: opacity 0.3s linear, color 0.3s linear;
+  transition-delay: 0.3s, 0s;
+  }
+
+  .namePubli:hover{
+    cursor: pointer;
+    visibility: visible;
+  opacity: 1;
+  background: rgba(255, 255, 255, .5);
+  color: #000;
+  transition-delay: 0s;
+  }
+
+  .swiper-button-next{
+    background-image: url(../images/arrow-next.svg);
+    background-size: 50px 50px;
+  }
+  .swiper-button-prev{
+    background-image: url(../images/arrow-prev.svg);
+    background-size: 50px 50px;
+  }
+
+  .swiper-pagination-bullet-active{
+    background: #000;
+  }
