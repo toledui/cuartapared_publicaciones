@@ -21,8 +21,8 @@ if(isset($_POST['nonce'])){
                 'descripcion' => sanitize_text_field($_POST['thagencia_galeria_agregar_descripcion']),
                 'wordpress_id' => sanitize_text_field($_POST['thagencia_galeria_agregar_foto_wordpress_id']),
                 'url'=>substr($_POST['thagencia_galeria_agregar_foto_url'],strlen(get_site_url()), strlen($_POST['thagencia_galeria_agregar_foto_url']))
-                //'url' => sanitize_text_field($_POST['thagencia_galeria_agregar_foto_url']) 
-            ]; 
+                //'url' => sanitize_text_field($_POST['thagencia_galeria_agregar_foto_url'])
+            ];
               $wpdb->insert($tabla2, $data);
               ?>
               <script>
@@ -69,7 +69,7 @@ $fotos=$wpdb->get_results("select * from {$tabla2} where cuartapared_publicacion
     <div class="container-fluid">
         <div class="row">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo get_site_url() ?>/wp-admin/admin.php?page=cuartapared_publicaciones%2Fadmin%2Flistar.php">Cuartapared Publicacion</a></li> 
+            <li class="breadcrumb-item"><a href="<?php echo get_site_url() ?>/wp-admin/admin.php?page=cuartapared_publicaciones%2Fadmin%2Flistar.php">Cuartapared Publicacion</a></li>
             <li class="breadcrumb-item active" aria-current="page">Crea tus <strong><?php echo $datos[0]['nombre'];?></strong></li>
         </ol>
         <h1 class="wp-heading-inline">Crea tus <strong><?php echo $datos[0]['nombre'];?></strong></h1>
@@ -90,7 +90,7 @@ $fotos=$wpdb->get_results("select * from {$tabla2} where cuartapared_publicacion
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
+                    <?php
                     foreach($fotos as $foto){
                         ?>
                     <tr>

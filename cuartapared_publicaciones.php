@@ -13,20 +13,20 @@ Text Domain: cuartapared_publicaciones
 if(!defined('ABSPATH')) die();
 if(!function_exists('cuartapared_publicaciones_instalar')){
     function cuartapared_publicaciones_instalar(){
-       
+
          //creamos tablas
         global $wpdb;
-        $sql ="create table if not exists 
+        $sql ="create table if not exists
             {$wpdb->prefix}cuartapared_publicaciones
             (
             id int not null auto_increment,
             nombre varchar(255) not null,
             fecha date,
             primary key (id)
-            ); 
+            );
             ";
         $wpdb->query($sql);
-        $sql2 ="create table if not exists 
+        $sql2 ="create table if not exists
             {$wpdb->prefix}cuartapared_publicacion
             (
             id int not null auto_increment,
@@ -36,13 +36,13 @@ if(!function_exists('cuartapared_publicaciones_instalar')){
             nombre varchar(255) not null,
             url varchar(500) not null,
             primary key (id)
-            ); 
+            );
             ";
         $wpdb->query($sql2);
         $fk="alter table {$wpdb->prefix}cuartapared_publicacion add constraint fk_cuartapared_publicaciones_id foreign key (cuartapared_publicaciones_id) references {$wpdb->prefix}cuartapared_publicaciones(id);";
         $wpdb->query($fk);
 
-        $sql3 ="create table if not exists 
+        $sql3 ="create table if not exists
         {$wpdb->prefix}cuartapared_publicacion_contenido
         (
         id int not null auto_increment,
@@ -51,23 +51,23 @@ if(!function_exists('cuartapared_publicaciones_instalar')){
         nombre varchar(255) not null,
         url varchar(500) not null,
         primary key (id)
-        ); 
+        );
         ";
         $wpdb->query($sql3);
         $fk="alter table {$wpdb->prefix}cuartapared_publicacion_contenido add constraint fk_cuartapared_publicacion_id foreign key (cuartapared_publicacion_id) references {$wpdb->prefix}thagencia_publicacion(id);";
         $wpdb->query($fk);
-        
+
     }
-    
+
 }
 if(!function_exists('cuartapared_publicaciones_desactivar')){
     function cuartapared_publicaciones_desactivar(){
 
         #limpiador de enlaces permanentes
         flush_rewrite_rules( );
-    } 
+    }
 }
- 
+
 
 #activar plugins
 register_activation_hook( __FILE__, 'cuartapared_publicaciones_instalar' );
@@ -81,7 +81,7 @@ if(!function_exists('thagencia_galeria_scripts')){
         wp_enqueue_style( "bootstrapcss",  plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ) );
         wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
         wp_enqueue_style( "sweetalert2",  plugins_url( 'assets/css/sweetalert2.css', __FILE__ ) );
-        wp_enqueue_script( "bootstrapjs",  plugins_url( 'assets/js/bootstrap.min.js', __FILE__ ), array('jquery')); 
+        wp_enqueue_script( "bootstrapjs",  plugins_url( 'assets/js/bootstrap.min.js', __FILE__ ), array('jquery'));
         wp_enqueue_script( "sweetalert2",  plugins_url( 'assets/js/sweetalert2.js', __FILE__ ), array('jquery'));
         wp_enqueue_script( "funcionesj",  plugins_url( 'assets/js/funciones.js', __FILE__ ) );
 
@@ -94,29 +94,29 @@ if(!function_exists('thagencia_galeria_scripts')){
         }else{
             return;
         }
-        
-       
+
+
      }
-     add_action('admin_enqueue_scripts', 'thagencia_galeria_scripts'); 
+     add_action('admin_enqueue_scripts', 'thagencia_galeria_scripts');
 }
 
 
 #agregar al menú
 add_action('admin_menu', function(){
-    add_menu_page( 
-        "Cuarta Pared Publicaciones", 
-        "Cuarta Pared Publicaciones", 
-        "manage_options",  
-        plugin_dir_path( __FILE__ )."admin/listar.php", 
-        null, 
-        plugin_dir_url( __FILE__ )."assets/images/galeria.png", 
+    add_menu_page(
+        "Cuarta Pared Publicaciones",
+        "Cuarta Pared Publicaciones",
+        "manage_options",
+        plugin_dir_path( __FILE__ )."admin/listar.php",
+        null,
+        plugin_dir_url( __FILE__ )."assets/images/galeria.png",
         140 );
     add_submenu_page(
         plugin_dir_path( __FILE__ )."admin/listar.php",
         "Publicaciones",
         "Publicaciones",
         "manage_options",
-        plugin_dir_path( __FILE__ )."admin/editar.php", 
+        plugin_dir_path( __FILE__ )."admin/editar.php",
         null
 
     );
@@ -125,7 +125,7 @@ add_action('admin_menu', function(){
         "Contenido de la publicación",
         "Contenido",
         "manage_options",
-        plugin_dir_path( __FILE__ )."admin/contenido.php", 
+        plugin_dir_path( __FILE__ )."admin/contenido.php",
         null
 
     );
@@ -165,16 +165,16 @@ if(!function_exists('thagencia_galeria_codigo_corto_display')){
 
     function thagencia_galeria_codigo_corto_display($argumentos, $content=""){
         global $wpdb;
-        $query="select * from {$wpdb->prefix}cuartapared_publicacion where cuartapared_publicaciones_id='".sanitize_text_field($argumentos['id'])."' order by id desc;"; 
+        $query="select * from {$wpdb->prefix}cuartapared_publicacion where cuartapared_publicaciones_id='".sanitize_text_field($argumentos['id'])."' order by id desc;";
         $datos=$wpdb->get_results($query, ARRAY_A);
         ?>
 
         <!-- Demo styles -->
   <style>
- 
-  
-  </style>
 
+
+  </style>
+<?php ob_start(); ?>
 <div class="swiper-container swiperid<?php echo $argumentos['id']; ?>" id=".swiperid<?php echo $argumentos['id']; ?>">
   <div class="swiper-wrapper grid-container">
     <?php foreach($datos as $dato): ?>
@@ -188,7 +188,7 @@ if(!function_exists('thagencia_galeria_codigo_corto_display')){
 </div>
   <!-- Swiper JS -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/js/swiper.min.js"></script> -->
- 
+
 
   <!-- Initialize Swiper -->
   <script>
@@ -228,10 +228,9 @@ if(!function_exists('thagencia_galeria_codigo_corto_display')){
       },
     },
 });
-    
+
 
   </script>
-      
 
       <!-- Insertamos el modal para el segundo slider -->
           <!-- Modal -->
@@ -242,13 +241,16 @@ if(!function_exists('thagencia_galeria_codigo_corto_display')){
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modalContBody">
-                  
+
                 </div>
               </div>
             </div>
           </div>
 
       <?php
+      $output = ob_get_clean();
+      return $output;
+    
     }
 }
 
@@ -278,9 +280,9 @@ if(!function_exists('cuartapared_contenido_ajax')){
 
   <!-- Initialize Swiper -->
   <script>
-    
+
     function show_swiper_slider(){
-      
+
     const mySwiper2<?php echo $_POST['id']; ?> = new Swiper('.swiper<?php echo $_POST['id']; ?>', {
     slidesPerView: 1,
     slidesPerColumn: 1,
@@ -313,11 +315,12 @@ if(!function_exists('cuartapared_contenido_ajax')){
     },
 });
       }
-    
+
   </script>
     <?php
     die();
   }
 
   add_action('wp_ajax_cuartapared_contenido_ajax', 'cuartapared_contenido_ajax');
+  add_action('wp_ajax_nopriv_cuartapared_contenido_ajax', 'cuartapared_contenido_ajax');
 }
